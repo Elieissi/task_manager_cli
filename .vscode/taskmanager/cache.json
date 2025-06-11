@@ -1,0 +1,14 @@
+[
+    {
+        "title": "Finish project",
+        "due_date": "2024-06-10",
+        "priority": "High",
+        "status": "Pending"
+    },
+    {
+        "title": "Buy groceries",
+        "due_date": "2024-06-09",
+        "priority": "Low",
+        "status": "Done"
+    }
+]
