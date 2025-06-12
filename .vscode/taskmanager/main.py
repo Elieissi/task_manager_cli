@@ -15,4 +15,71 @@ from task import Task
     - Exit
 4. Loop and call TaskManager methods based on user input
 5. Save tasks on exit"""
+manager = Task_manager()
 
+manager.load_tasks()
+
+while True:
+    command = input(
+        "Welcome to Task Manager program.\n"
+        "Commands:\n"
+        "1: Add task\n"
+        "2: List tasks\n"
+        "3: List pending tasks\n"
+        "4: List done tasks\n"
+        "5: Mark task as done\n"
+        "6: Delete task\n"
+        "7: Save tasks\n"
+        "8: Exit\n"
+        "Enter choice: "
+    )
+
+    if command not in {"1", "2", "3", "4", "5", "6", "7", "8"}:
+        print("Invalid command.")
+    else:
+        match command:
+            case "1":
+                # prompt user for task info → call add_task
+                title = input("What is the title of your task?").strip()
+                while True:
+                    due_date = input("Enter due date of your task as DD/MM/YYYY")
+                    if due_date[0:2] <= "31" and (due_date[0:2].isdigit()):
+                        
+                        if due_date[2] == "/" and (due_date[5] == "/"):
+
+                            if due_date[3:5].isdigit() and 1 <= int(due_date[3:5]) <= 12: #is digit comes first because casted int
+
+                                if due_date[6:10] >= "2025" and (due_date[6:10].isdigit()):
+                                    break
+                    
+                    print("Invalid try again.")
+                while True:
+                    priority = input("\n 1: High priority \n 2: Medium Priority \n 3: Low Priority ")
+                    if priority in {"1", "2", "3"}:
+                        break
+                    else:
+                        print("Invalid selection")
+
+                manager.add_task(title, due_date, priority)
+
+
+            case "2":
+                # call list_tasks
+                pass
+            case "3":
+                # call list_pending_tasks
+                pass
+            case "4":
+                # call list_done_tasks
+                pass
+            case "5":
+                # prompt for index → call mark_done on that task
+                pass
+            case "6":
+                # prompt for index → call delete_task
+                pass
+            case "7":
+                # call save_tasks
+                pass
+            case "8":
+                break  # exit app

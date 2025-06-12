@@ -19,23 +19,32 @@ class Task:
         self.title = title
         self.due_date = due_date
         self.priority = priority
-        self.status = "Pending"  # always Pending on creation
+        self.status = "Pending"  # always Pending on creation, one less thing to prompt user
 
     def mark_done(self):
-        pass
+        self.status = "Done"
 
     def set_due_date(self, new_due_date):
+        # update due_date
         pass
 
     def set_title(self, new_title):
+        # update title
         pass
 
     def set_priority(self, new_priority):
+        # update priority
         pass
 
     def to_dict(self):
+        # build dict with title, due_date, priority, status
+        # return the dict
         pass
 
     @staticmethod
     def from_dict(data_dict):
+        # extract title, due_date, priority, status from data_dict
+        # create new Task(title, due_date, priority)
+        # set the status on the Task object
+        # return the Task object
         pass
