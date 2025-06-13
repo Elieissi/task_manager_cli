@@ -17,11 +17,12 @@ from task import Task
 5. Save tasks on exit"""
 manager = TaskManager()
 
+
 manager.load_tasks()
+print("Welcome to Task Manager program.\n")
 
 while True:
-    command = input(
-        "Welcome to Task Manager program.\n"
+    command = input(    
         "Commands:\n"
         "1: Add task\n"
         "2: List tasks\n"
@@ -40,7 +41,7 @@ while True:
         match command:
             case "1":
                 # prompt user for task info → call add_task
-                title = input("What is the title of your task?\n").strip()
+                title = input("\nWhat is the title of your task?\n").strip()
                 while True:
                     due_date = input("Enter due date of your task as DD/MM/YYYY\n")
                     if len(due_date) == 10:
@@ -51,12 +52,12 @@ while True:
 
                                 if due_date[3:5].isdigit() and 1 <= int(due_date[3:5]) <= 12: #is digit comes first because casted int
 
-                                    if due_date[6:10] >= "2025" and (due_date[6:10].isdigit()):
+                                    if due_date[6:10].isdigit() and int(due_date[6:10]) >= 2025:
                                         break
                     
                     print("Invalid try again.")
                 while True:
-                    priority = input("\n 1: High priority \n 2: Medium Priority \n 3: Low Priority ")
+                    priority = input("\n What is the priority?\n 1: High priority \n 2: Medium Priority \n 3: Low Priority ")
                     if priority in {"1", "2", "3"}:
                         break
                     else:
@@ -68,21 +69,32 @@ while True:
 
             case "2":
                 # call list_tasks
-                pass
+                manager.list_tasks()
             case "3":
                 # call list_pending_tasks
-                pass
+                manager.list_pending_tasks()
             case "4":
                 # call list_done_tasks
-                pass
+                manager.list_done_tasks()
             case "5":
                 # prompt for index → call mark_done on that task
-                pass
+                try:
+                    index = int(input("Enter the index of the task to mark done.") - 1)
+                    task = manager.find_task(index)
+                    task.mark_done()
+                except ValueError:
+                    print("Invalid input, enter a number.")
+
             case "6":
                 # prompt for index → call delete_task
-                pass
+                try:
+                    index = int(input("Enter the index of the task to delete.") - 1)
+                    manager.delete_task(index)
+                except ValueError:
+                    print("Invalid input, enter a number.")
             case "7":
                 # call save_tasks
-                pass
+                manager.save_tasks()
             case "8":
+                manager.save_tasks()
                 break  # exit app
