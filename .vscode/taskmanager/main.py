@@ -1,4 +1,4 @@
-from taskmanager import Task_manager
+from taskmanager import TaskManager
 from task import Task
 
 """Main CLI loop:
@@ -15,7 +15,7 @@ from task import Task
     - Exit
 4. Loop and call TaskManager methods based on user input
 5. Save tasks on exit"""
-manager = Task_manager()
+manager = TaskManager()
 
 manager.load_tasks()
 
@@ -40,17 +40,19 @@ while True:
         match command:
             case "1":
                 # prompt user for task info → call add_task
-                title = input("What is the title of your task?").strip()
+                title = input("What is the title of your task?\n").strip()
                 while True:
-                    due_date = input("Enter due date of your task as DD/MM/YYYY")
-                    if due_date[0:2] <= "31" and (due_date[0:2].isdigit()):
-                        
-                        if due_date[2] == "/" and (due_date[5] == "/"):
+                    due_date = input("Enter due date of your task as DD/MM/YYYY\n")
+                    if len(due_date) == 10:
 
-                            if due_date[3:5].isdigit() and 1 <= int(due_date[3:5]) <= 12: #is digit comes first because casted int
+                        if due_date[0:2] <= "31" and (due_date[0:2].isdigit()):
+                            
+                            if due_date[2] == "/" and (due_date[5] == "/"):
 
-                                if due_date[6:10] >= "2025" and (due_date[6:10].isdigit()):
-                                    break
+                                if due_date[3:5].isdigit() and 1 <= int(due_date[3:5]) <= 12: #is digit comes first because casted int
+
+                                    if due_date[6:10] >= "2025" and (due_date[6:10].isdigit()):
+                                        break
                     
                     print("Invalid try again.")
                 while True:
@@ -61,6 +63,7 @@ while True:
                         print("Invalid selection")
 
                 manager.add_task(title, due_date, priority)
+                print("\nTask Successfully added.")
 
 
             case "2":
