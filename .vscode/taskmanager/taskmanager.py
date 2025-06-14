@@ -15,7 +15,7 @@
 
 from task import Task
 import json
-import os
+from pathlib import Path
 
 class TaskManager:  # no underscore in class name
 
@@ -25,11 +25,12 @@ class TaskManager:  # no underscore in class name
     def add_task(self, title, due_date, priority):
         # create new Task(title, due_date, priority)
         # append it to self.tasks
-        pass
+        self.tasks.append(Task(title,due_date, priority))
+
 
     def delete_task(self, index):
         # delete Task at given index from self.tasks
-        pass
+        del self.tasks[index]
 
     def list_tasks(self):
         # loop over self.tasks
@@ -53,17 +54,19 @@ class TaskManager:  # no underscore in class name
             if task.status == "Done":
                 print(task.title)
 
-    def find_task(self, index):
-        # return Task at given index in self.tasks
-        pass
 
     def save_tasks(self):
         # for each Task in self.tasks:
         #     call to_dict() → get dict
         # build list of dicts
-        # open tasks.json in write mode
+        # open cache.json in write mode
         # dump list of dicts to json
-        pass
+        with open("cache.json", "w") as file:
+            for task in self.tasks:
+                Task.to_dict()
+
+
+
 
     def load_tasks(self):
         # try to open cache.json
@@ -73,4 +76,9 @@ class TaskManager:  # no underscore in class name
         #     for each dict:
         #         call Task.from_dict(dict) → get Task object
         #         append Task object to self.tasks
-        pass
+        if Path("cache.json").exists():
+            with open("cache.json", "r"):
+                pass
+        
+        else:
+            self.tasks = []

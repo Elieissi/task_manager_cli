@@ -79,19 +79,22 @@ while True:
             case "5":
                 # prompt for index → call mark_done on that task
                 try:
-                    index = int(input("Enter the index of the task to mark done.") - 1)
-                    task = manager.find_task(index)
-                    task.mark_done()
+                    index = int(input("Enter the index of the task to mark done.")) - 1
+                    manager.tasks[index].mark_done()
                 except ValueError:
                     print("Invalid input, enter a number.")
+                except IndexError:
+                    print("Invalid index.")
 
             case "6":
                 # prompt for index → call delete_task
                 try:
-                    index = int(input("Enter the index of the task to delete.") - 1)
+                    index = int(input("Enter the index of the task to delete.")) - 1
                     manager.delete_task(index)
                 except ValueError:
                     print("Invalid input, enter a number.")
+                except IndexError:
+                    print("Invalid Index.")
             case "7":
                 # call save_tasks
                 manager.save_tasks()
