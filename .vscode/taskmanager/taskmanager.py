@@ -15,6 +15,7 @@
 
 from task import Task
 import json
+import os
 
 class TaskManager:  # no underscore in class name
 
@@ -33,17 +34,24 @@ class TaskManager:  # no underscore in class name
     def list_tasks(self):
         # loop over self.tasks
         # print each Task with index
-        pass
-
+        n = 0
+        for task in self.tasks:
+            n += 1
+            print(f"Task {n}: {task.title}")
+            
     def list_pending_tasks(self):
         # loop over self.tasks
         # if status == "Pending", print the Task
-        pass
+        for task in self.tasks:
+            if task.status == "Pending":
+                print(task.title)
 
     def list_done_tasks(self):
         # loop over self.tasks
         # if status == "Done", print the Task
-        pass
+        for task in self.tasks:
+            if task.status == "Done":
+                print(task.title)
 
     def find_task(self, index):
         # return Task at given index in self.tasks
@@ -58,7 +66,7 @@ class TaskManager:  # no underscore in class name
         pass
 
     def load_tasks(self):
-        # try to open tasks.json
+        # try to open cache.json
         # if file does not exist → set self.tasks to empty list
         # else:
         #     load json → gives list of dicts

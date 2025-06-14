@@ -39,7 +39,8 @@ class Task:
     def to_dict(self):
         # build dict with title, due_date, priority, status
         # return the dict
-        pass
+        data_dict = {"title": self.title, "due_date": self.due_date, "priority": self.priority, "status": self.status}
+        return data_dict
 
     @staticmethod
     def from_dict(data_dict):
@@ -47,4 +48,13 @@ class Task:
         # create new Task(title, due_date, priority)
         # set the status on the Task object
         # return the Task object
-        pass
+        
+        title = data_dict.get("title")
+        due_date = data_dict.get("due_date")
+        priority = data_dict.get("priority")
+        status = data_dict.get("status")
+
+        task = Task(title, due_date, priority) #creates the new object
+        task.status = status #sets it manually
+        
+        return task
