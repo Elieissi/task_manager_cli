@@ -31,11 +31,12 @@ while True:
         "5: Mark task as done\n"
         "6: Delete task\n"
         "7: Save tasks\n"
-        "8: Exit\n"
+        "8: Edit tasks\n"
+        "9: Exit\n"
         "Enter choice: "
     )
 
-    if command not in {"1", "2", "3", "4", "5", "6", "7", "8"}:
+    if command not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
         print("Invalid command.")
     else:
         match command:
@@ -62,7 +63,7 @@ while True:
                         break
                     else:
                         print("Invalid selection")
-
+                
                 manager.add_task(title, due_date, priority)
                 print("\nTask Successfully added.")
 
@@ -99,5 +100,30 @@ while True:
                 # call save_tasks
                 manager.save_tasks()
             case "8":
+                action = input("\nWhat is the Action?\n1: Edit due date\n2: Edit Title\n3: Edit Priority\n")
+                
+                if action in {"1", "2", "3"}:
+                    try:
+                        index = int(input("Enter the index of the task to edit: ")) - 1
+                        task = manager.tasks[index]
+                    except ValueError:
+                        print("Invalid input, enter a number.")
+                    except IndexError:
+                        print("Invalid index.")
+                    else:
+                        if action == "1":
+                            new_due = input("Enter new due date (DD/MM/YYYY): ").strip()
+                            task.set_due_date(new_due)
+                        elif action == "2":
+                            new_title = input("Enter new title: ").strip()
+                            task.set_title(new_title)
+                        elif action == "3":
+                            new_priority = input("Enter new priority (1/2/3): ").strip()
+                            task.set_priority(new_priority)
+                else:
+                    print("Invalid selection")
+
+                
+            case "9":
                 manager.save_tasks()
-                break  # exit app
+                break #exits

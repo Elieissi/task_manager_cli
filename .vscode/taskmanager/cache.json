@@ -1,14 +1,6 @@
-[
-    {
-        "title": "Finish project",
-        "due_date": "2025-06-10",
-        "priority": "High",
-        "status": "Pending"
-    },
-    {
-        "title": "Buy groceries",
-        "due_date": "2025-06-09",
-        "priority": "Low",
-        "status": "Done"
-    }
-]
+{
+    "title": "bruh",
+    "due_date": "08/12/2025",
+    "priority": "1",
+    "status": "Pending"
+}

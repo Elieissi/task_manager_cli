@@ -56,29 +56,31 @@ class TaskManager:  # no underscore in class name
 
 
     def save_tasks(self):
-        # for each Task in self.tasks:
-        #     call to_dict() → get dict
-        # build list of dicts
-        # open cache.json in write mode
-        # dump list of dicts to json
+        task_dict = {}  
+        for task in self.tasks:
+            n = task.to_dict()
+            task_dict.update(n)
+
         with open("cache.json", "w") as file:
-            for task in self.tasks:
-                Task.to_dict()
+            json.dump(task_dict, file, indent=4)
 
 
 
 
     def load_tasks(self):
-        # try to open cache.json
-        # if file does not exist → set self.tasks to empty list
-        # else:
-        #     load json → gives list of dicts
-        #     for each dict:
-        #         call Task.from_dict(dict) → get Task object
-        #         append Task object to self.tasks
+
+        #Use path to check if file exists.
+        #Put json into variable and for each dict in the json translate it
+        #Put newly translated object into list of tasks
+        #Check edgecase if the file exists but empty then set to empty list
         if Path("cache.json").exists():
-            with open("cache.json", "r"):
-                pass
-        
+            try:
+                with open("cache.json", "r") as file:
+                    loaded = json.load(file)
+                    for dic in loaded:
+                        obj = Task.from_dict(dic)
+                        self.tasks.append(obj)
+            except json.JSONDecodeError:
+                self.tasks = []
         else:
             self.tasks = []
