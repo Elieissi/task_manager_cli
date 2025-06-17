@@ -1,5 +1,4 @@
 from taskmanager import TaskManager
-from task import Task
 
 """Main CLI loop:
 1. Initialize TaskManager
@@ -43,20 +42,7 @@ while True:
             case "1":
                 # prompt user for task info → call add_task
                 title = input("\nWhat is the title of your task?\n").strip()
-                while True:
-                    due_date = input("Enter due date of your task as DD/MM/YYYY\n")
-                    if len(due_date) == 10:
-
-                        if due_date[0:2] <= "31" and (due_date[0:2].isdigit()):
-                            
-                            if due_date[2] == "/" and (due_date[5] == "/"):
-
-                                if due_date[3:5].isdigit() and 1 <= int(due_date[3:5]) <= 12: #is digit comes first because casted int
-
-                                    if due_date[6:10].isdigit() and int(due_date[6:10]) >= 2025:
-                                        break
-                    
-                    print("Invalid try again.")
+                manager.valid_date_checker()
                 while True:
                     priority = input("\n What is the priority?\n 1: High priority \n 2: Medium Priority \n 3: Low Priority ")
                     if priority in {"1", "2", "3"}:
@@ -64,6 +50,12 @@ while True:
                     else:
                         print("Invalid selection")
                 
+                #change to words
+                if priority == "1":
+                    priority = "High"
+                elif priority == "2":
+                    priority = "Medium"
+                else: priority = "Low"
                 manager.add_task(title, due_date, priority)
                 print("\nTask Successfully added.")
 
@@ -112,15 +104,23 @@ while True:
                         print("Invalid index.")
                     else:
                         if action == "1":
-                            new_due = input("Enter new due date (DD/MM/YYYY): ").strip()
-                            task.set_due_date(new_due)
+                            due_date = manager.valid_date_checker()
+                            task.set_due_date(due_date)
                         elif action == "2":
                             new_title = input("Enter new title: ").strip()
                             task.set_title(new_title)
                         elif action == "3":
-                            new_priority = input("Enter new priority (1/2/3): ").strip()
-                            task.set_priority(new_priority)
-                else:
+                            
+                            while True:
+                                new_priority = input("Enter new priority \n 1: High\n 2: Medium\n 3: Low ").strip()
+                                if new_priority in {"1", "2", "3"}:
+                                    task.set_priority(new_priority)
+                                    break
+
+                                else: 
+                                    print("Invalid selection.")
+                            
+                else:   
                     print("Invalid selection")
 
                 

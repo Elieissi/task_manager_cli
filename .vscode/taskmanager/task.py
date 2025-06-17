@@ -24,17 +24,22 @@ class Task:
     def mark_done(self):
         self.status = "Done"
 
-    def set_due_date(self, new_due_date):
+    def set_due_date(self, due_date):
         # update due_date
-        pass
+        self.due_date = due_date
 
     def set_title(self, new_title):
         # update title
-        pass
+        self.title = new_title
 
     def set_priority(self, new_priority):
         # update priority
-        pass
+        if new_priority == "1":
+            new_priority = "High"
+        elif new_priority == "2":
+            new_priority = "Medium"
+        else: new_priority = "Low"
+        self.priority = new_priority
 
     def to_dict(self):
         # build dict with title, due_date, priority, status
@@ -43,16 +48,16 @@ class Task:
         return data_dict
 
     @staticmethod
-    def from_dict(data_dict):
-        # extract title, due_date, priority, status from data_dict
+    def from_dict(dic):
+        # extract title, due_date, priority, from the json
         # create new Task(title, due_date, priority)
         # set the status on the Task object
         # return the Task object
         
-        title = data_dict.get("title")
-        due_date = data_dict.get("due_date")
-        priority = data_dict.get("priority")
-        status = data_dict.get("status")
+        title = dic["title"]
+        due_date = dic["due_date"]
+        priority = dic["priority"]
+        status = dic["status"]
 
         task = Task(title, due_date, priority) #creates the new object
         task.status = status #sets it manually

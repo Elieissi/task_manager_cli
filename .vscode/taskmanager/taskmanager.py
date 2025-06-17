@@ -56,13 +56,16 @@ class TaskManager:  # no underscore in class name
 
 
     def save_tasks(self):
-        task_dict = {}  
+        # convert each Task object to a dictionary
+        task_dicts = []
         for task in self.tasks:
-            n = task.to_dict()
-            task_dict.update(n)
+            task_data = task.to_dict()
+            task_dicts.append(task_data)
 
+        # write the list of task dictionaries to the JSON file
         with open("cache.json", "w") as file:
-            json.dump(task_dict, file, indent=4)
+            json.dump(task_dicts, file, indent=4)
+
 
 
 
@@ -84,3 +87,20 @@ class TaskManager:  # no underscore in class name
                 self.tasks = []
         else:
             self.tasks = []
+
+    @staticmethod
+    def valid_date_checker():
+        while True:
+            due_date = input("Enter due date of your task as DD/MM/YYYY\n")
+            if len(due_date) == 10:
+
+                if due_date[0:2] <= "31" and (due_date[0:2].isdigit()):
+                            
+                    if due_date[2] == "/" and (due_date[5] == "/"):
+
+                        if due_date[3:5].isdigit() and 1 <= int(due_date[3:5]) <= 12: #is digit comes first because casted int
+
+                            if due_date[6:10].isdigit() and int(due_date[6:10]) >= 2025:
+                                return due_date
+                    
+            print("Invalid try again.")

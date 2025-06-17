@@ -1,6 +1,14 @@
-{
-    "title": "bruh",
-    "due_date": "08/12/2025",
-    "priority": "1",
-    "status": "Pending"
-}
+[
+    {
+        "title": "bruh",
+        "due_date": "08/12/2025",
+        "priority": "High",
+        "status": "Pending"
+    },
+    {
+        "title": "antony",
+        "due_date": "02/02/2025",
+        "priority": "Medium",
+        "status": "Pending"
+    }
+]
